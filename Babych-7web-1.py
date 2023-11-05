@@ -1,14 +1,15 @@
 #Write a decorator that will calculate the execution time of a function.
 
-import datetime
+import time
 
 def calculate_execution_time(func):
-    def wrapper(a,b):
-        start_time = datetime.datetime.now()
-        func(a,b)
-        finish_time = datetime.datetime.now()
-        executing_time = finish_time-start_time
-        print(executing_time)
+    def wrapper(*args, **kwargs):
+        start_time = time.perf_counter()
+        result = func(*args, **kwargs)
+        end_time = time.perf_counter()
+        execution_time = end_time - start_time
+        print(f"Execution time: {execution_time:.4f} seconds")
+        return result
 
     return wrapper
 
